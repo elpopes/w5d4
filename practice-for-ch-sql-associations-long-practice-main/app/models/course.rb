@@ -9,7 +9,10 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
+
 class Course < ApplicationRecord
+    # validates :instructor_id, presence: true
+    
     has_many :enrollments,
         primary_key: :id,
         foreign_key: :course_id,
@@ -20,8 +23,13 @@ class Course < ApplicationRecord
         source: :student
 
     has_one :prereq,
-        primary_key: :prereq_id,
+        primary_key: :prereq_id, 
         foreign_key: :id,
+        class_name: :Course
+
+    has_one :instructor,
+        primary_key: :id,
+        foreign_key: :instructor_id,
         class_name: :Course
 
 end
